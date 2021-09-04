@@ -1,15 +1,15 @@
-import React from 'react';
-import {Card, CardContent} from '@material-ui/core';
+import React, {useState} from 'react';
 import {Button} from 'devextreme-react';
+import DialogView from './components/DialogView';
 
 function App() {
+
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="App">
-      <Card>
-        <CardContent>
-          <Button>DevExtreme button</Button>
-        </CardContent>
-      </Card>
+        <Button onClick={() => setOpen(true)} >Open Dialog</Button>
+        <DialogView open={open} setOpen={setOpen}/>
     </div>
   );
 }
