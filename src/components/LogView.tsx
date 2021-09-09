@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core';
 import {data} from '../data';
+import {ScrollView} from 'devextreme-react';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
     createStyles({
@@ -23,10 +24,20 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 const LogView:React.FC = () => {
     const classes = useStyles();
     const [logs] = useState(data);
+    const messagesEndRef = useRef<null | HTMLDivElement>(null)
 
-    return <div className={classes.root}>
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView()
+    }
+
+    useEffect(() => {
+        scrollToBottom();
+    }, []);
+
+    return <ScrollView className={classes.root} useNative={true}>
         {logs.map((line, index) => <><span key={index} className={classes.item}>{line}</span><br/></>)}
-    </div>
+        <div ref={messagesEndRef} />
+    </ScrollView>
 }
 
 export default LogView;

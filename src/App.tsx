@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button} from 'devextreme-react';
 import DialogView from './components/DialogView';
+import LogView from './components/LogView';
 
 function App() {
 
